@@ -1,4 +1,4 @@
-/*import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,6 +12,7 @@ import org.jdom.output.XMLOutputter;
 import java.io.IOException;
 import java.io.FileOutputStream;
 
+import temporalabstraction.tamodule.SignalInstance;
 import timeserie.TTimeSerie;
 import temporalabstraction.configuration.*;
 import cases.TCase;
@@ -31,7 +32,7 @@ import temporalabstraction.expected.*;
  * @author Alessio Bottrighi
  * @version 1.1
  */
-/*public class TQueriesXml {
+public class TQueriesXml {
 //  private org.jdom.Element serieXml;
   private Template template;
   private TCase tcase;
@@ -629,4 +630,3 @@ import temporalabstraction.expected.*;
 
 
 }
-*/
