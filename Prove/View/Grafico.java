@@ -23,7 +23,15 @@ public class Grafico extends JPanel{
         JFrame frame1 = new JFrame();
         frame1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JFrame frame = new JFrame();
+
+        try {
+            // Imposta il look and feel Nimbus del fileChooser
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setPreferredSize(new Dimension(800, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // Visualizza la finestra di dialogo per selezionare un file
         int result = fileChooser.showOpenDialog(frame);
@@ -31,10 +39,24 @@ public class Grafico extends JPanel{
         HashMap<Float, Date> risultati = ReadCSVFile.readFile(file);
         // Creazione della serie di dati
         XYSeries serie = new XYSeries("Dati di esempio");
+        Date primaData=null;
+        long DT=0;
         for (Float key : risultati.keySet()) {
+            if(primaData==null){
+                primaData=risultati.get(key);
+                DT = primaData.getTime();
+            }
+            if(risultati.get(key).getTime()-DT<0){
+                DT=risultati.get(key).getTime();
+            }
+        }
+
+        for (Float key : risultati.keySet()) {
+
             Date value = risultati.get(key);
-            long timeinMillis = value.getTime();
-            serie.add(timeinMillis, key);
+            long timeinMillis = value.getTime()-DT;
+
+            serie.add(timeinMillis/1000, key);
         }
 
         // Creazione della collezione di serie
@@ -68,17 +90,17 @@ public class Grafico extends JPanel{
 
         JPanel grafico = new JPanel();
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(1000,1000));
+        chartPanel.setPreferredSize(new Dimension(700,700));
         JScrollPane scrollPane = new JScrollPane(chartPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
         scrollPane.getHorizontalScrollBar().setUnitIncrement(10);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-        scrollPane.setPreferredSize(new Dimension(1000,1000));
+        scrollPane.setPreferredSize(new Dimension(700,700));
         grafico.add(scrollPane);
         frame1.add(grafico);
-        frame1.setSize(new Dimension(1000,1000));
+        frame1.setSize(new Dimension(700,700));
         frame1.setVisible(true);
     }
 
