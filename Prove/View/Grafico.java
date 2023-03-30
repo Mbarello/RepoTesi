@@ -9,6 +9,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RectangleInsets;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +44,10 @@ public class Grafico extends JPanel{
             HashMap<Float, Date> risultati = ReadCSVFile.readFile(file);
             // Creazione della serie di dati
             XYSeries serie = new XYSeries("Dati di esempio");
+            //ORDINO I DATI
+            //LI USO PER CREARE LA QUERY XML
+            //GRAZIE A TEMPO OTTENGO UNA RISPOSTA
+            //IN BASE ALLE RISPOSTE PER OGNI TREND O STATO TROVATO  CREO UNA SERIE DIVERSA
             Date primaData=null;
             long DT=0;
             for (Float key : risultati.keySet()) {
@@ -90,21 +95,27 @@ public class Grafico extends JPanel{
             plot.setBackgroundPaint(Color.lightGray);
             plot.setDomainGridlinePaint(Color.white);
             plot.setRangeGridlinePaint(Color.white);
+            plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+            plot.setDomainCrosshairVisible(true);
+            plot.setRangeCrosshairVisible(true);
 
 
             JPanel grafico = new JPanel();
+
+
+
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(700,700));
+            chartPanel.setPreferredSize(new Dimension(500,500));
             JScrollPane scrollPane = new JScrollPane(chartPanel);
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
             scrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-            scrollPane.setPreferredSize(new Dimension(700,700));
+            scrollPane.setPreferredSize(new Dimension(500,500));
             grafico.add(scrollPane);
             frame1.add(grafico);
-            frame1.setSize(new Dimension(700,700));
+            frame1.setSize(new Dimension(500,500));
             frame1.setVisible(true);
         }
         else{
