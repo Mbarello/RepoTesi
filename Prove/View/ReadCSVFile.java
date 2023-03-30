@@ -30,8 +30,7 @@ public class ReadCSVFile {
 
                 try {
                     Date date = dateFormat.parse(ora);
-                    long milliseconds = calendar.getTimeInMillis() - date.getTime();
-                    risultati.put(Float.parseFloat(data[4]), milliseconds);
+                    risultati.put(Float.parseFloat(data[4]), date);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
