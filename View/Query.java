@@ -24,7 +24,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 public class Query {
 
-    private LinkedHashMap<Float, Date> risultati;
+    private HashMap<LocalDateTime, Float> risultati;
 
     public static void main(String[] args) {
     }
@@ -104,16 +104,23 @@ public class Query {
         xmlWriter.writeEndElement(); // DataInfo
 
         xmlWriter.writeStartElement("NumericDataSeries");
-        this.risultati = ReadCSVFile.readFile(file);
-        for (Date d : risultati.values()) {
+        this.risultati = ReadCSVFile.ritornaData(file);
+        for (LocalDateTime d : risultati.keySet()) {
+            xmlWriter.writeStartElement("NumericaData");
             xmlWriter.writeStartElement("DateTimeSecond");
             xmlWriter.writeAttribute("year", String.valueOf(d.getYear()));
-            xmlWriter.writeAttribute("month", String.valueOf(d.getMonth()));
-            xmlWriter.writeAttribute("day", String.valueOf(d.getDay()));
-            xmlWriter.writeAttribute("hour", String.valueOf(d.getHours()));
-            xmlWriter.writeAttribute("minute", String.valueOf(d.getMinutes()));
-            xmlWriter.writeAttribute("second", String.valueOf(d.getSeconds()));
+            xmlWriter.writeAttribute("month", String.valueOf(d.getMonthValue()));
+            xmlWriter.writeAttribute("day", String.valueOf(d.getDayOfMonth()));
+            xmlWriter.writeAttribute("hour", String.valueOf(d.getHour()));
+            xmlWriter.writeAttribute("minute", String.valueOf(d.getMinute()));
+            xmlWriter.writeAttribute("second", String.valueOf(d.getSecond()));
             xmlWriter.writeEndElement();//DateTimeSecond
+            xmlWriter.writeStartElement("Adimensional");
+            xmlWriter.writeAttribute("value", String.valueOf(risultati.get(d)));
+            xmlWriter.writeAttribute("precision", "float");
+            xmlWriter.writeEndElement();//Adimensional
+            xmlWriter.writeEndElement(); //NumericaData
+
         }
 
         xmlWriter.writeEndElement(); // Data

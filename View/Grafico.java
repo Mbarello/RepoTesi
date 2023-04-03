@@ -21,8 +21,10 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 
 public class Grafico extends JPanel implements ActionListener {
@@ -58,7 +60,7 @@ public class Grafico extends JPanel implements ActionListener {
     private JLabel minRateLabel;
     private JLabel maxRateLabel;
     private final JButton creaQuery;
-    private HashMap<Float, Date> risultati;
+    private LinkedHashMap<Float, LocalDateTime> risultati;
     private JLabel selectedFileLabel;
     private JComboBox selezionaScelta;
     private final JFrame frame;
@@ -474,7 +476,7 @@ public class Grafico extends JPanel implements ActionListener {
         //IN BASE ALLE RISPOSTE PER OGNI TREND O STATO TROVATO  CREO UNA SERIE DIVERSA
 
         //trovo il DT da sottrarre a ogni vaore sull'asse x per fare iniziare il nostro grafico al tempo 0
-        Date primaData = null;
+        LocalDateTime primaData = null;
 
         for (Float key : risultati.keySet()) {
             if (primaData == null) {
@@ -484,9 +486,9 @@ public class Grafico extends JPanel implements ActionListener {
         }
 
         for (Float key : risultati.keySet()) {
-            Date value = risultati.get(key);
-            long timeinMillis = value.getTime() - primaData.getTime(); // calcola la differenza tra i tempi
-            serie.add(timeinMillis / 1000, key);
+            LocalDateTime value = risultati.get(key);
+            long seconds = ChronoUnit.SECONDS.between(primaData, value);
+            serie.add(seconds, key);
         }
     }
 

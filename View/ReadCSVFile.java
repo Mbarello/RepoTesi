@@ -1,23 +1,22 @@
 package View;
 
+import javafx.util.converter.LocalDateTimeStringConverter;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ReadCSVFile {
 
-    public static LinkedHashMap<Float, Date> readFile(File file) {
+    public static LinkedHashMap<Float, LocalDateTime> readFile(File file) {
 
-        LinkedHashMap<Float, Date> risultati = new LinkedHashMap<>();
+        LinkedHashMap<Float, LocalDateTime> risultati = new LinkedHashMap<>();
         String csvSplitBy = ",";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
 
         try (BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
 
@@ -29,8 +28,10 @@ public class ReadCSVFile {
                 String ora = orario[1];
 
                 try {
-                    Date date = dateFormat.parse(ora);
-                    risultati.put(Float.parseFloat(data[4]), date);
+                    LocalTime time = LocalTime.parse(ora, formatter);
+                    LocalDate today = LocalDate.now();
+                    LocalDateTime dateTime = LocalDateTime.of(today, time);
+                    risultati.put(Float.parseFloat(data[4]), dateTime);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -40,21 +41,40 @@ public class ReadCSVFile {
             e.printStackTrace();
         }
 
-        return sortHashMapByDate(risultati);
+        return sortHashMapByDateTime(risultati);
     }
+
     //Ordinamento dati file pdf (i dati non sono in ordine cronologico)
-    public static LinkedHashMap<Float, Date> sortHashMapByDate(HashMap<Float, Date> map) {
-        List<Map.Entry<Float, Date>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<Float, Date>>() {
-            public int compare(Map.Entry<Float, Date> o1, Map.Entry<Float, Date> o2) {
+    public static LinkedHashMap<Float, LocalDateTime> sortHashMapByDateTime(HashMap<Float, LocalDateTime> map) {
+        List<Map.Entry<Float, LocalDateTime>> list = new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Float, LocalDateTime>>() {
+            public int compare(Map.Entry<Float, LocalDateTime> o1, Map.Entry<Float, LocalDateTime> o2) {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
 
-        LinkedHashMap<Float, Date> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<Float, Date> entry : list) {
+        LinkedHashMap<Float, LocalDateTime> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Float, LocalDateTime> entry : list) {
             sortedMap.put(entry.getKey(), entry.getValue());
         }
         return sortedMap;
+    }
+
+    public static HashMap<LocalDateTime,Float> ritornaData(File file) {
+        HashMap<LocalDateTime,Float> mapData = new HashMap<>();
+        String csvSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(csvSplitBy);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                mapData.put(LocalDateTime.parse(data[0],formatter), Float.parseFloat(data[4]));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return mapData;
     }
 }
