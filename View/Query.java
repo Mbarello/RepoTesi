@@ -30,7 +30,7 @@ public class Query {
     public static void main(String[] args) {
     }
 
-    public void creaQuery(String trend, String minDuration, String maxTimeGap, String minRateField, String maxRateField, String localWindow, File file) throws XMLStreamException, IOException, TransformerException {
+    public void creaQuery(String trend, String minDuration, String maxTimeGap, String minRateField, String maxRateField, String localWindow, File file, String maxOscillation) throws XMLStreamException, IOException, TransformerException {
         StringWriter sw = new StringWriter();
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter xmlWriter = new IndentingXMLStreamWriter(xmlOutputFactory.createXMLStreamWriter(sw));
@@ -57,28 +57,36 @@ public class Query {
         xmlWriter.writeEndElement(); // DateTimeSecond
         xmlWriter.writeEndElement(); // AbstractionInfo
 
-        // AbstractionTrend
-        xmlWriter.writeStartElement("AbstractionTrend");
-        xmlWriter.writeAttribute("temporalUnit", "minute");
-        xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
-        switch (trend) {
-            case "Fortemente Decrescente":
-                xmlWriter.writeAttribute("trend", "Strong dec"); //??
-                break;
-            case "Decrescente":
-                xmlWriter.writeAttribute("trend", "dec");
-                break;
-            case "Crescente":
-                xmlWriter.writeAttribute("trend", "inc");
-                break;
-            case "Fortemente crescente":
-                xmlWriter.writeAttribute("trend", "Strong inc"); //??
-                break;
+        if (Objects.equals(trend, "Fortemente Decrescente") || Objects.equals(trend, "Decrescente") || Objects.equals(trend, "Crescente") || Objects.equals(trend, "Fortemente crescente")) {
+            // AbstractionTrend
+            xmlWriter.writeStartElement("AbstractionTrend");
+            xmlWriter.writeAttribute("temporalUnit", "minute");
+            xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
+            switch (trend) {
+                case "Fortemente Decrescente":
+                    xmlWriter.writeAttribute("trend", "Strong dec"); //??
+                    break;
+                case "Decrescente":
+                    xmlWriter.writeAttribute("trend", "dec");
+                    break;
+                case "Crescente":
+                    xmlWriter.writeAttribute("trend", "inc");
+                    break;
+                case "Fortemente crescente":
+                    xmlWriter.writeAttribute("trend", "Strong inc"); //??
+                    break;
+            }
+            xmlWriter.writeAttribute("minRate", minRateField);
+            xmlWriter.writeAttribute("maxRate", maxRateField);
+            xmlWriter.writeAttribute("localWin", localWindow);
+        } else {
+            xmlWriter.writeStartElement("AbstractionStationary");
+            xmlWriter.writeAttribute("temporalUnit", "minute");
+            xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
+            xmlWriter.writeAttribute("maxRate", maxRateField);
+            xmlWriter.writeAttribute("maxOscillationMargin", maxOscillation);
         }
 
-        xmlWriter.writeAttribute("minRate", minRateField);
-        xmlWriter.writeAttribute("maxRate", maxRateField);
-        xmlWriter.writeAttribute("localWin", localWindow);
         xmlWriter.writeEndElement(); // AbstractionTrend
 
         xmlWriter.writeEndElement(); // Abstraction

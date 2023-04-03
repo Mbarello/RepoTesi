@@ -66,6 +66,8 @@ public class Grafico extends JPanel implements ActionListener {
     private final JFrame frame;
     private int result = -1;
     private JFileChooser fileChooser = new JFileChooser();
+    private JTextField maxOscMarginField;
+    private JLabel maxOscMarginLabel;
 
     public Grafico() {
         // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
@@ -77,6 +79,7 @@ public class Grafico extends JPanel implements ActionListener {
         // Genera il frame principale
         this.frame = new JFrame("Grafico");
         this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.frame.setMinimumSize(new Dimension(600,800));
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.frame.setLayout(new BorderLayout());
 
@@ -89,7 +92,7 @@ public class Grafico extends JPanel implements ActionListener {
         this.creaQuery = new JButton("Crea query XML");
         this.creaQuery.addActionListener(this);
         this.creaQuery.setVisible(false);
-        this.centerPanel.add(this.creaQuery); //TODO metodo che crei la query prendendo i parametri
+        this.centerPanel.add(this.creaQuery);
 
         this.frame.add(centerPanel, BorderLayout.CENTER);
 
@@ -146,7 +149,6 @@ public class Grafico extends JPanel implements ActionListener {
         this.centerPanel.add(this.confermaScelta);
     }
 
-    //TODO aggiungere anche Stazionario nel quale è da passare minDuration, maximumTimeGap, Max Rate, MaxOscillationMargin
     public void sceltaTrend() {
         //Aggiungi la JLabel e le JTextField per la selezione dei parametri di ordinamento
         this.ordineLabel = new JLabel("Ordinamento:");
@@ -185,6 +187,11 @@ public class Grafico extends JPanel implements ActionListener {
         this.localWinField = new JTextField("0", 5);
         this.centerPanel.add(this.localWinField);
 
+        this.maxOscMarginLabel = new JLabel("Max Oscillation margin");
+        this.centerPanel.add(this.maxOscMarginLabel);
+        this.maxOscMarginField = new JTextField("0", 5);
+        this.centerPanel.add(this.maxOscMarginField);
+
         this.parametriOrdinamentoLabel.setVisible(false);
         this.minDurationField.setVisible(false);
         this.minDurationLabel.setVisible(false);
@@ -198,6 +205,8 @@ public class Grafico extends JPanel implements ActionListener {
         this.maxRateField.setVisible(false);
         this.localWinLabel.setVisible(false);
         this.localWinField.setVisible(false);
+        this.maxOscMarginField.setVisible(false);
+        this.maxOscMarginLabel.setVisible(false);
     }
 
     public void sceltaStato() {
@@ -269,10 +278,19 @@ public class Grafico extends JPanel implements ActionListener {
             this.maxRateLabel.setVisible(true);
             this.minRateLabel.setVisible(true);
             this.minRateField.setVisible(true);
-            this.maxRateLabel.setVisible(true);
-            this.maxRateField.setVisible(true);
             this.localWinLabel.setVisible(true);
             this.localWinField.setVisible(true);
+            this.maxOscMarginField.setVisible(false);
+            this.maxOscMarginLabel.setVisible(false);
+            if(this.selezionaOrdine.getSelectedItem() == "Stazionario") {
+                this.maxOscMarginField.setVisible(true);
+                this.maxOscMarginLabel.setVisible(true);
+                this.minRateLabel.setVisible(false);
+                this.minRateField.setVisible(false);
+                this.localWinLabel.setVisible(false);
+                this.localWinField.setVisible(false);
+            }
+
             //Rende visibile il pulsante di Query
             if (this.result == JFileChooser.APPROVE_OPTION) {
                 this.creaQuery.setVisible(true);
@@ -307,6 +325,8 @@ public class Grafico extends JPanel implements ActionListener {
             this.selezionaOrdine.setVisible(false);
             this.ordineLabel.setVisible(false);
             this.creaQuery.setVisible(false);
+            this.maxOscMarginField.setVisible(false);
+            this.maxOscMarginLabel.setVisible(false);
 
             if (this.result == JFileChooser.APPROVE_OPTION) {
                 this.creaQuery.setVisible(true);
@@ -351,6 +371,8 @@ public class Grafico extends JPanel implements ActionListener {
             this.maxThresholdField.setVisible(false);
             //Rende invisibile il pulsante di query
             this.creaQuery.setVisible(false);
+            this.maxOscMarginField.setVisible(false);
+            this.maxOscMarginLabel.setVisible(false);
         }
 
         if (e.getSource() == this.creaQuery) {
@@ -358,7 +380,7 @@ public class Grafico extends JPanel implements ActionListener {
 
                 try {
                     Query query = new Query();
-                    query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile());
+                    query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
                 } catch (XMLStreamException | TransformerException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -464,7 +486,6 @@ public class Grafico extends JPanel implements ActionListener {
         scrollPane.setHorizontalScrollBar(scrollBar);
 
         JFrame frame1 = new JFrame("Line Chart Example");
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.add(scrollPane);
         frame1.pack();
         frame1.setVisible(true);
