@@ -25,6 +25,7 @@ import javax.xml.stream.XMLStreamWriter;
 public class Query {
 
     private HashMap<LocalDateTime, Float> risultati;
+    private static HashMap<LocalDateTime, Float> risultati1;
 
     public static void main(String[] args) {
     }
@@ -135,13 +136,13 @@ public class Query {
         String xml = sw.toString();
 
         // generazione del file XML
-        File fileXml = new File("temporal_abstraction_request.xml");
+        File fileXml = new File("temporal_abstraction_request_trend.xml");
         FileWriter fw = new FileWriter(fileXml);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(xml);
         bw.close();
     }
-    public static void creaQuery(String minDuration, String maxTimeGap, String minThreshold, String maxThreshold) throws XMLStreamException, IOException, TransformerException {
+    public void creaQuery(String minDuration, String maxTimeGap, String minThreshold, String maxThreshold, File file) throws XMLStreamException, IOException, TransformerException {
         StringWriter sw = new StringWriter();
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter xmlWriter = new IndentingXMLStreamWriter(xmlOutputFactory.createXMLStreamWriter(sw));
@@ -215,7 +216,7 @@ public class Query {
         xmlWriter.writeEndElement(); // Abstraction
         xmlWriter.writeEndElement(); //Abstractions
 
-        /*
+
         // Series
         xmlWriter.writeStartElement("Series");
         xmlWriter.writeStartElement("Data");
@@ -226,12 +227,32 @@ public class Query {
         xmlWriter.writeStartElement("Comment");
         xmlWriter.writeCharacters("query");
         xmlWriter.writeEndElement(); // Comment
-
         xmlWriter.writeEndElement(); // DataInfo
 
+
+        xmlWriter.writeStartElement("NumericDataSeries");
+
+        this.risultati1 = ReadCSVFile.ritornaData(file);
+        for (LocalDateTime d : risultati1.keySet()) {
+            xmlWriter.writeStartElement("NumericaData");
+            xmlWriter.writeStartElement("DateTimeSecond");
+            xmlWriter.writeAttribute("year", String.valueOf(d.getYear()));
+            xmlWriter.writeAttribute("month", String.valueOf(d.getMonthValue()));
+            xmlWriter.writeAttribute("day", String.valueOf(d.getDayOfMonth()));
+            xmlWriter.writeAttribute("hour", String.valueOf(d.getHour()));
+            xmlWriter.writeAttribute("minute", String.valueOf(d.getMinute()));
+            xmlWriter.writeAttribute("second", String.valueOf(d.getSecond()));
+            xmlWriter.writeEndElement();//DateTimeSecond
+            xmlWriter.writeStartElement("Adimensional");
+            xmlWriter.writeAttribute("value", String.valueOf(risultati1.get(d)));
+            xmlWriter.writeAttribute("precision", "float");
+            xmlWriter.writeEndElement();//Adimensional
+            xmlWriter.writeEndElement(); //NumericaData
+        }
+        xmlWriter.writeEndElement();//NumericDataSeries
         xmlWriter.writeEndElement(); // Data
         xmlWriter.writeEndElement(); // Series
-        */
+
         xmlWriter.writeEndElement(); // TemporalAbstractionRequest
         xmlWriter.writeEndDocument();
 
@@ -241,8 +262,8 @@ public class Query {
         String xml = sw.toString();
 
         // generazione del file XML
-        File file = new File("temporal_abstraction_request.xml");
-        FileWriter fw = new FileWriter(file);
+        File file1 = new File("temporal_abstraction_request_state.xml");
+        FileWriter fw = new FileWriter(file1);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(xml);
         bw.close();

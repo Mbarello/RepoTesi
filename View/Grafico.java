@@ -365,7 +365,8 @@ public class Grafico extends JPanel implements ActionListener {
             }
             if (Objects.equals(this.selezionaScelta.getSelectedItem(), "Stato")) {
                 try {
-                    Query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText());
+                    Query query = new Query();
+                    query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
                 } catch (XMLStreamException | IOException | TransformerException ex) {
                     throw new RuntimeException(ex);
                 }
