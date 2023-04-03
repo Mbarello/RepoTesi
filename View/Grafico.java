@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
@@ -354,13 +355,18 @@ public class Grafico extends JPanel implements ActionListener {
             if (Objects.equals(this.selezionaScelta.getSelectedItem(), "Trend")) {
 
                 try {
-                    Query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText());
+                    Query query = new Query();
+                    query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile());
                 } catch (XMLStreamException | TransformerException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
             if (Objects.equals(this.selezionaScelta.getSelectedItem(), "Stato")) {
-                Query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(),this.minThresholdField, this.maxThresholdField);
+                try {
+                    Query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText());
+                } catch (XMLStreamException | IOException | TransformerException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
     }
@@ -467,15 +473,14 @@ public class Grafico extends JPanel implements ActionListener {
         //GRAZIE A TEMPO OTTENGO UNA RISPOSTA
         //IN BASE ALLE RISPOSTE PER OGNI TREND O STATO TROVATO  CREO UNA SERIE DIVERSA
 
+        //trovo il DT da sottrarre a ogni vaore sull'asse x per fare iniziare il nostro grafico al tempo 0
         Date primaData = null;
+
         for (Float key : risultati.keySet()) {
             if (primaData == null) {
                 primaData = risultati.get(key);
-            } else {
-                if (risultati.get(key).before(primaData)) {
-                    primaData = risultati.get(key);
-                }
             }
+            break;
         }
 
         for (Float key : risultati.keySet()) {
