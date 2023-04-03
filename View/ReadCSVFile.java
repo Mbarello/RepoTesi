@@ -8,9 +8,9 @@ import java.util.*;
 
 public class ReadCSVFile {
 
-    public static HashMap readFile(File file) {
+    public static LinkedHashMap<Float, Date> readFile(File file) {
 
-        HashMap risultati = new HashMap();
+        LinkedHashMap<Float, Date> risultati = new LinkedHashMap<>();
         String csvSplitBy = ",";
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
         Calendar calendar = Calendar.getInstance();
@@ -39,6 +39,24 @@ public class ReadCSVFile {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       return risultati;
+
+        return sortHashMapByDate(risultati);
     }
+
+    //Ordinamento dati file pdf (i dati non sono in ordine cronologico)
+    public static LinkedHashMap<Float, Date> sortHashMapByDate(HashMap<Float, Date> map) {
+        List<Map.Entry<Float, Date>> list = new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Float, Date>>() {
+            public int compare(Map.Entry<Float, Date> o1, Map.Entry<Float, Date> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+
+        LinkedHashMap<Float, Date> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Float, Date> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
+    }
+
 }

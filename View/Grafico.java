@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Grafico extends JPanel implements ActionListener {
+
     private JLabel parametriOrdinamentoStatoLabel;
     private JLabel minDurationStatoLabel;
     private JTextField minDurationStatoField;
@@ -68,9 +69,15 @@ public class Grafico extends JPanel implements ActionListener {
 
     private int result = -1;
 
-    private final JFileChooser fileChooser = new JFileChooser();
+    private JFileChooser fileChooser;
 
     public Grafico() {
+        // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         // Genera il frame principale
         this.frame = new JFrame("Grafico");
         this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -89,13 +96,6 @@ public class Grafico extends JPanel implements ActionListener {
         this.centerPanel.add(this.creaQuery); //TODO metodo che crei la query prendendo i parametri
 
         this.frame.add(centerPanel, BorderLayout.CENTER);
-
-        // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
 
         // Centra il frame sullo schermo
         this.frame.setLocationRelativeTo(null);
@@ -240,6 +240,7 @@ public class Grafico extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.bottoneSelezionaFile) {
+            fileChooser = new JFileChooser();
             fileChooser.setPreferredSize(new Dimension(800, 600));
             // Visualizza la finestra di dialogo per selezionare un file
             this.result = fileChooser.showOpenDialog(this);
@@ -463,16 +464,12 @@ public class Grafico extends JPanel implements ActionListener {
         //GRAZIE A TEMPO OTTENGO UNA RISPOSTA
         //IN BASE ALLE RISPOSTE PER OGNI TREND O STATO TROVATO  CREO UNA SERIE DIVERSA
 
-        Date primaData = null;
-        long DT = 0;
+        Date primaData=null;
         for (Float key : risultati.keySet()) {
-            if (primaData == null) {
-                primaData = risultati.get(key);
-            } else {
-                if (risultati.get(key).before(primaData)) {
-                    primaData = risultati.get(key);
-                }
+            if(primaData==null){
+                primaData=risultati.get(key);
             }
+            break;
         }
 
         for (Float key : risultati.keySet()) {

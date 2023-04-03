@@ -32,6 +32,7 @@ public class Grafico extends JPanel{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setPreferredSize(new Dimension(800, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -111,10 +112,18 @@ public class Grafico extends JPanel{
         plot.setRangeCrosshairVisible(true);
 
 
+
         JPanel grafico = new JPanel();
 
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(500,500));
+        chartPanel.setPreferredSize(new Dimension(1300, 500));
+
+        // Abilita lo zoom con la rotella del mouse
+        chartPanel.setMouseZoomable(true);
+
+        // Aggiungi il ChartPanel al contenitore
+        add(chartPanel);
+
         JScrollPane scrollPane = new JScrollPane(chartPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -124,7 +133,7 @@ public class Grafico extends JPanel{
         scrollPane.setPreferredSize(new Dimension(500,500));
         grafico.add(scrollPane);
         frame1.add(grafico);
-        frame1.setSize(new Dimension(500,500));
+        frame1.setSize(new Dimension(600,600));
         frame1.setVisible(true);
     }
 

@@ -42,7 +42,7 @@ public class ReadCSVFile {
 
         return sortHashMapByDate(risultati);
     }
-
+//Ordinamento dati file pdf (i dati non sono in ordine cronologico)
     public static LinkedHashMap<Float, Date> sortHashMapByDate(HashMap<Float, Date> map) {
         List<Map.Entry<Float, Date>> list = new LinkedList<>(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Float, Date>>() {
