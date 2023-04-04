@@ -68,6 +68,7 @@ public class Grafico extends JPanel implements ActionListener {
     private JFileChooser fileChooser = new JFileChooser();
     private JTextField maxOscMarginField;
     private JLabel maxOscMarginLabel;
+    private boolean risposta;
 
     public Grafico() {
         // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
@@ -380,7 +381,11 @@ public class Grafico extends JPanel implements ActionListener {
 
                 try {
                     Query query = new Query();
-                    query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
+                    this.risposta = query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
+                    if (risposta) {
+                        QueryPerform queryPerform = new QueryPerform();
+                        queryPerform.queryPerform();
+                    }
                 } catch (XMLStreamException | TransformerException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -388,7 +393,11 @@ public class Grafico extends JPanel implements ActionListener {
             if (Objects.equals(this.selezionaScelta.getSelectedItem(), "Stato")) {
                 try {
                     Query query = new Query();
-                    query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
+                    this.risposta = query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
+                    if (risposta) {
+                       QueryPerform queryPerform = new QueryPerform();
+                        queryPerform.queryPerform();
+                    }
                 } catch (XMLStreamException | IOException | TransformerException ex) {
                     throw new RuntimeException(ex);
                 }

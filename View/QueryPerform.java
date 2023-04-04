@@ -1,0 +1,52 @@
+package View;
+
+import org.hcklab.project.tempo.facade.DefaultTempoFacade;
+import org.jdom.Document;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class QueryPerform {
+
+    public void queryPerform(){
+        try {
+            File xmlFile = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\Queries al server Tempo\\q1State-1.xml");
+            SAXBuilder saxBuilder = new SAXBuilder();
+            Document jdomDoc = saxBuilder.build(xmlFile);
+
+            DefaultTempoFacade tempoFacade = new DefaultTempoFacade();
+            Document doc = tempoFacade.performTemporalAbstraction(jdomDoc);
+
+            File file = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\RepoTesi");
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+
+            // Crea l'oggetto XMLOutputter per scrivere il contenuto del documento nel file
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // Imposta il formato di output
+            Format format = Format.getPrettyFormat();
+            format.setEncoding("UTF-8");
+            xmlOutput.setFormat(format);
+
+            // Scrivi il contenuto del documento nel file
+            FileOutputStream fos = new FileOutputStream(file);
+            xmlOutput.output(doc, fos);
+            fos.flush();
+            fos.close();
+            System.out.println("File salvato correttamente!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

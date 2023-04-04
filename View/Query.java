@@ -30,7 +30,7 @@ public class Query {
     public static void main(String[] args) {
     }
 
-    public void creaQuery(String trend, String minDuration, String maxTimeGap, String minRateField, String maxRateField, String localWindow, File file, String maxOscillation) throws XMLStreamException, IOException, TransformerException {
+    public boolean creaQuery(String trend, String minDuration, String maxTimeGap, String minRateField, String maxRateField, String localWindow, File file, String maxOscillation) throws XMLStreamException, IOException, TransformerException {
         StringWriter sw = new StringWriter();
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter xmlWriter = new IndentingXMLStreamWriter(xmlOutputFactory.createXMLStreamWriter(sw));
@@ -149,8 +149,9 @@ public class Query {
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(xml);
         bw.close();
+        return true;
     }
-    public void creaQuery(String minDuration, String maxTimeGap, String minThreshold, String maxThreshold, File file) throws XMLStreamException, IOException, TransformerException {
+    public boolean creaQuery(String minDuration, String maxTimeGap, String minThreshold, String maxThreshold, File file) throws XMLStreamException, IOException, TransformerException {
         StringWriter sw = new StringWriter();
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter xmlWriter = new IndentingXMLStreamWriter(xmlOutputFactory.createXMLStreamWriter(sw));
@@ -275,6 +276,8 @@ public class Query {
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(xml);
         bw.close();
+
+        return true;
     }
 
 
