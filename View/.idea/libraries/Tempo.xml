@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/../../Tempo/Tempo.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Tempo/Tempo.jar!/" />
+    </SOURCES>
   </library>
 </component>

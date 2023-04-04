@@ -12,6 +12,7 @@
     <orderEntry type="library" exported="" name="jcommon-1.0.8" level="project" />
     <orderEntry type="library" exported="" name="poi-3.9" level="project" />
     <orderEntry type="library" exported="" name="Tempo" level="project" />
-    <orderEntry type="library" exported="" name="jdom-1.0" level="project" />
+    <orderEntry type="library" name="jdom" level="project" />
+    <orderEntry type="library" name="JdomAttuale" level="project" />
   </component>
 </module>

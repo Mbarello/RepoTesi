@@ -68,7 +68,7 @@ public class Grafico extends JPanel implements ActionListener {
     private JFileChooser fileChooser = new JFileChooser();
     private JTextField maxOscMarginField;
     private JLabel maxOscMarginLabel;
-    private boolean risposta;
+    private File risposta;
 
     public Grafico() {
         // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
@@ -382,9 +382,12 @@ public class Grafico extends JPanel implements ActionListener {
                 try {
                     Query query = new Query();
                     this.risposta = query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
-                    if (risposta) {
+                    if (risposta.exists()) {
                         QueryPerform queryPerform = new QueryPerform();
-                        queryPerform.queryPerform();
+                        queryPerform.queryPerform(risposta );
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Query non creata", "Errore", JOptionPane.ERROR_MESSAGE);
+
                     }
                 } catch (XMLStreamException | TransformerException | IOException ex) {
                     throw new RuntimeException(ex);
@@ -394,9 +397,12 @@ public class Grafico extends JPanel implements ActionListener {
                 try {
                     Query query = new Query();
                     this.risposta = query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
-                    if (risposta) {
+                    if (risposta.exists()) {
                        QueryPerform queryPerform = new QueryPerform();
-                        queryPerform.queryPerform();
+                       queryPerform.queryPerform(risposta);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Query non creata", "Errore", JOptionPane.ERROR_MESSAGE);
+
                     }
                 } catch (XMLStreamException | IOException | TransformerException ex) {
                     throw new RuntimeException(ex);

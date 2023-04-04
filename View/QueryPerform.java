@@ -15,16 +15,15 @@ import java.io.IOException;
 
 public class QueryPerform {
 
-    public void queryPerform(){
+    public void queryPerform(File xmlFile){
         try {
-            File xmlFile = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\Queries al server Tempo\\q1State-1.xml");
             SAXBuilder saxBuilder = new SAXBuilder();
             Document jdomDoc = saxBuilder.build(xmlFile);
 
             DefaultTempoFacade tempoFacade = new DefaultTempoFacade();
             Document doc = tempoFacade.performTemporalAbstraction(jdomDoc);
 
-            File file = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\RepoTesi");
+            File file = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\risposta.xml");
             file.getParentFile().mkdirs();
             file.createNewFile();
 
@@ -34,7 +33,6 @@ public class QueryPerform {
             // Imposta il formato di output
             Format format = Format.getPrettyFormat();
             format.setEncoding("UTF-8");
-            xmlOutput.setFormat(format);
 
             // Scrivi il contenuto del documento nel file
             FileOutputStream fos = new FileOutputStream(file);
