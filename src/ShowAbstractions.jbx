@@ -1,0 +1,16 @@
+[PropertyInfo]
+jointY,int,false,false, , ,false,<default>
+signalInstance,SignalInstance,false,false, , ,false,<default>
+stateY,int,false,false, , ,false,<default>
+stationaryY,int,false,false, , ,false,<default>
+TSEnd,double,false,false, , ,false,<default>
+TSStart,double,false,false, , ,false,<default>
+YFdown,int,false,false, , ,false,<default>
+YFup,int,false,false, , ,false,<default>
+YIdown,int,false,false, , ,false,<default>
+YIup,int,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

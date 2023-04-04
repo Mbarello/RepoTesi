@@ -1,0 +1,23 @@
+[PropertyInfo]
+arraySize,int,false,false, , ,true,<default>
+average,double,false,false, , ,true,<default>
+maxPeak,double,false,false, , ,true,<default>
+media,double,false,false, , ,false,<default>
+minPeak,double,false,false, , ,true,<default>
+modificataAverage,boolean,false,false, , ,false,<default>
+modificataQuad,boolean,false,false, , ,false,<default>
+name,String,false,false, , ,true,<default>
+nElementi,int,false,false, , ,false,<default>
+nome,String,false,false, , ,false,<default>
+numValues,int,false,false, , ,true,<default>
+piccoMax,double,false,false, , ,false,<default>
+piccoMin,double,false,false, , ,false,<default>
+quad,double,false,false, , ,true,<default>
+scarto,double,false,false, , ,false,<default>
+serie,TPoint[],false,false, , ,false,<default>
+size,int,false,false, , ,true,<default>
+[IconNames]
+
+
+
+

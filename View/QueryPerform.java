@@ -8,7 +8,6 @@ import org.jdom.output.XMLOutputter;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class QueryPerform {
             DefaultTempoFacade tempoFacade = new DefaultTempoFacade();
             Document doc = tempoFacade.performTemporalAbstraction(jdomDoc);
 
-            File file = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\risposta.xml");
+            File file = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\RepoTesi\\View\\risposta.xml");
             file.getParentFile().mkdirs();
             file.createNewFile();
 
@@ -39,7 +38,6 @@ public class QueryPerform {
             xmlOutput.output(doc, fos);
             fos.flush();
             fos.close();
-            System.out.println("File salvato correttamente!");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {

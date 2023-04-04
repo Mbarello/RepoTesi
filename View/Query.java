@@ -1,21 +1,9 @@
 package View;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.sun.xml.internal.txw2.output.IndentingXMLStreamWriter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.util.*;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -23,10 +11,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 
 public class Query {
-
     private HashMap<LocalDateTime, Float> risultati;
     private static HashMap<LocalDateTime, Float> risultati1;
-
     public static void main(String[] args) {
     }
 
@@ -63,18 +49,10 @@ public class Query {
             xmlWriter.writeAttribute("temporalUnit", "minute");
             xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
             switch (trend) {
-                case "Fortemente Decrescente":
-                    xmlWriter.writeAttribute("trend", "Strong dec"); //??
-                    break;
-                case "Decrescente":
-                    xmlWriter.writeAttribute("trend", "dec");
-                    break;
-                case "Crescente":
-                    xmlWriter.writeAttribute("trend", "inc");
-                    break;
-                case "Fortemente crescente":
-                    xmlWriter.writeAttribute("trend", "Strong inc"); //??
-                    break;
+                case "Fortemente Decrescente" -> xmlWriter.writeAttribute("trend", "Strong dec"); //??
+                case "Decrescente" -> xmlWriter.writeAttribute("trend", "dec");
+                case "Crescente" -> xmlWriter.writeAttribute("trend", "inc");
+                case "Fortemente crescente" -> xmlWriter.writeAttribute("trend", "Strong inc"); //??
             }
             xmlWriter.writeAttribute("minRate", minRateField);
             xmlWriter.writeAttribute("maxRate", maxRateField);
@@ -155,14 +133,17 @@ public class Query {
         StringWriter sw = new StringWriter();
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter xmlWriter = new IndentingXMLStreamWriter(xmlOutputFactory.createXMLStreamWriter(sw));
-        xmlWriter.writeStartDocument();
-        xmlWriter.writeStartElement("TemporalAbstractionRequest");
+        xmlWriter.writeStartDocument("ISO-8859-1", "1.0");
+        xmlWriter.writeStartElement("TemporalAbstractionRequest"); //CHIUSO
 
-        xmlWriter.writeStartElement("RequestInfo");
-        xmlWriter.writeStartElement("user");
-        xmlWriter.writeAttribute("admin", "admin");
+        xmlWriter.writeStartElement("RequestInfo"); //CHIUSO
+
+        xmlWriter.writeStartElement("user"); //CHIUSO
+        xmlWriter.writeCharacters("admin");
+        xmlWriter.writeEndElement();//user
+
         LocalDateTime data = LocalDateTime.now();
-        xmlWriter.writeStartElement("DateTimeSecond");
+        xmlWriter.writeStartElement("DateTimeSecond"); //CHIUSO
         xmlWriter.writeAttribute("year", String.valueOf(data.getYear()));
         xmlWriter.writeAttribute("month", String.valueOf(data.getMonthValue()));
         xmlWriter.writeAttribute("day", String.valueOf(data.getDayOfMonth()));
@@ -172,39 +153,47 @@ public class Query {
         xmlWriter.writeEndElement(); // DateTimeSecond
         xmlWriter.writeEndElement();// RequestInfo
         // Abstractions
-        xmlWriter.writeStartElement("Abstractions");
-        xmlWriter.writeStartElement("Abstraction");
+        xmlWriter.writeStartElement("Abstractions"); //CHIUSO
+        xmlWriter.writeStartElement("Abstraction"); //CHIUSO
         xmlWriter.writeAttribute("minDuration", minDuration);
-
+        xmlWriter.writeStartElement("AbstractionInfo"); //CHIUSO
         // AbstractionInfo
-        xmlWriter.writeStartElement("AbstractionInfo");
-        xmlWriter.writeStartElement("Comment");
+        xmlWriter.writeStartElement("Comment"); //CHIUSO
         xmlWriter.writeEndElement(); // Comment
 
 
-        xmlWriter.writeEndElement(); // AbstractionInfo
-        xmlWriter.writeStartElement("DateTimeSecond");
+        xmlWriter.writeStartElement("DateTimeSecond"); //CHIUSO
         xmlWriter.writeAttribute("year", String.valueOf(data.getYear()));
         xmlWriter.writeAttribute("month", String.valueOf(data.getMonthValue()));
         xmlWriter.writeAttribute("day", String.valueOf(data.getDayOfMonth()));
         xmlWriter.writeAttribute("hour", String.valueOf(data.getHour()));
         xmlWriter.writeAttribute("minute", String.valueOf(data.getMinute()));
         xmlWriter.writeAttribute("second", String.valueOf(data.getSecond()));
+        xmlWriter.writeEndElement(); // DateTimeSecond
         xmlWriter.writeEndElement(); // AbstractionInfo
         // AbstractionState
-        xmlWriter.writeStartElement("AbstractionState");
+        xmlWriter.writeStartElement("AbstractionState"); //CHIUSO
         xmlWriter.writeAttribute("temporalUnit", "minute");
         xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
-        xmlWriter.writeStartElement("ThresholdList");
-        xmlWriter.writeStartElement("Threshold");
-        xmlWriter.writeAttribute( "T01", minThreshold);
-        xmlWriter.writeEndElement();//Threshold
-        xmlWriter.writeStartElement("Thresholds");
-        xmlWriter.writeAttribute( "T02", maxThreshold);
-        xmlWriter.writeEndElement();//Thresholds
-        xmlWriter.writeStartElement("Thresholds");
-        xmlWriter.writeAttribute( "T03", "");
-        xmlWriter.writeEndElement();//Thresholds
+        xmlWriter.writeStartElement("ThresholdsList"); //CHIUSO
+
+        // write the T01 threshold element
+        xmlWriter.writeStartElement("Threshold"); //CHIUSO
+        xmlWriter.writeAttribute("name", "T01");
+        xmlWriter.writeAttribute("max", minThreshold);
+        xmlWriter.writeEndElement(); //Threshold
+
+        // write the T02 threshold element
+        xmlWriter.writeStartElement("Thresholds"); //CHIUSO
+        xmlWriter.writeAttribute("name", "T02");
+        xmlWriter.writeAttribute("max",maxThreshold);
+        xmlWriter.writeEndElement(); //Threshold
+
+        // write the T03 threshold element
+        xmlWriter.writeStartElement("Thresholds"); //CHIUSO
+        xmlWriter.writeAttribute("name", "T03");
+        xmlWriter.writeAttribute("max", "");
+        xmlWriter.writeEndElement(); //Thresholds
         xmlWriter.writeEndElement();//ThresholdList
 
 
@@ -229,21 +218,28 @@ public class Query {
         // Series
         xmlWriter.writeStartElement("Series");
         xmlWriter.writeStartElement("Data");
-
         // DataInfo
         xmlWriter.writeStartElement("DataInfo");
         xmlWriter.writeAttribute("id", "admin-1090086105593");
         xmlWriter.writeStartElement("Comment");
         xmlWriter.writeCharacters("query");
         xmlWriter.writeEndElement(); // Comment
+        xmlWriter.writeStartElement("DateTimeSecond");
+        xmlWriter.writeAttribute("year", String.valueOf(data.getYear()));
+        xmlWriter.writeAttribute("month", String.valueOf(data.getMonthValue()));
+        xmlWriter.writeAttribute("day", String.valueOf(data.getDayOfMonth()));
+        xmlWriter.writeAttribute("hour", String.valueOf(data.getHour()));
+        xmlWriter.writeAttribute("minute", String.valueOf(data.getMinute()));
+        xmlWriter.writeAttribute("second", String.valueOf(data.getSecond()));
+        xmlWriter.writeEndElement(); // DateTimeSecond
         xmlWriter.writeEndElement(); // DataInfo
 
 
         xmlWriter.writeStartElement("NumericDataSeries");
 
-        this.risultati1 = ReadCSVFile.ritornaData(file);
+        risultati1 = ReadCSVFile.ritornaData(file);
         for (LocalDateTime d : risultati1.keySet()) {
-            xmlWriter.writeStartElement("NumericaData");
+            xmlWriter.writeStartElement("NumericData");
             xmlWriter.writeStartElement("DateTimeSecond");
             xmlWriter.writeAttribute("year", String.valueOf(d.getYear()));
             xmlWriter.writeAttribute("month", String.valueOf(d.getMonthValue()));
@@ -279,11 +275,6 @@ public class Query {
 
         return file1;
     }
-
-
-
-
-
 
 }
 

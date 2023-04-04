@@ -1,0 +1,16 @@
+[PropertyInfo]
+activeDims,boolean[],false,false, , ,false,<default>
+center,TTimeSerie,false,false, , ,true,<default>
+childs,TTVNode[],false,false, , ,false,<default>
+father,TTVNode,false,false, , ,false,<default>
+isLeaf,boolean,false,false, , ,false,<default>
+link,int,false,false, , ,true,<default>
+maxNumChilds,int,false,false, , ,false,<default>
+numChilds,int,false,false, , ,true,<default>
+numDimensions,int,false,false, , ,true,<default>
+radius,double,false,false, , ,true,<default>
+[IconNames]
+
+
+
+
