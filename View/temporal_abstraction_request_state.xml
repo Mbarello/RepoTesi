@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TemporalAbstractionRequest>
+  <RequestInfo>
+    <user>admin</user>
+    <DateTimeSecond year="2023" month="4" day="4" hour="17" minute="32" second="39"></DateTimeSecond>
+  </RequestInfo>
+  <Abstractions>
+    <Abstraction minDuration="0">
+      <AbstractionInfo>
+        <Comment></Comment>
+        <DateTimeSecond year="2023" month="4" day="4" hour="17" minute="32" second="39"></DateTimeSecond>
+      </AbstractionInfo>
+      <AbstractionState temporalUnit="minute" maximumTimeGap="0">
+        <ThresholdsList>
+          <Threshold name="T01" max="0"></Threshold>
+          <Thresholds name="T02" max="0"></Thresholds>
+          <Thresholds name="T03" max=""></Thresholds>
+        </ThresholdsList>
+        <Conditions>
+          <Step threshold="T02"></Step>
+        </Conditions>
+        <CounterConditions>
+          <Step threshold="T01"></Step>
+          <Step threshold="T01"></Step>
+        </CounterConditions>
+      </AbstractionState>
+    </Abstraction>
+  </Abstractions>
+  <Series>
+    <Data>
+      <DataInfo id="admin-1090086105593">
+        <Comment>query</Comment>
+        <DateTimeSecond year="2023" month="4" day="4" hour="17" minute="32" second="39"></DateTimeSecond>
+      </DataInfo>
+      <NumericDataSeries>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0421516" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0492207" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0286458" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0303863" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0303863" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0401846" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0303863" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0286458" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0347869" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0346013" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0446051" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0401846" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0504704" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0274317" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0315968" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0504704" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0401846" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0421516" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0407075" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0303863" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0347869" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0347869" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0433484" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0303863" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0347869" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.041906" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0286458" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0347869" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0421516" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0450646" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0315968" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0462581" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0475113" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0433484" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0347869" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0492207" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0389225" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="41"></DateTimeSecond>
+          <Adimensional value="1.0433484" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="43"></DateTimeSecond>
+          <Adimensional value="1.0480305" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="40"></DateTimeSecond>
+          <Adimensional value="1.041906" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="39"></DateTimeSecond>
+          <Adimensional value="1.0377206" precision="float"></Adimensional>
+        </NumericData>
+        <NumericData>
+          <DateTimeSecond year="2023" month="2" day="1" hour="4" minute="24" second="42"></DateTimeSecond>
+          <Adimensional value="1.0359923" precision="float"></Adimensional>
+        </NumericData>
+      </NumericDataSeries>
+    </Data>
+  </Series>
+</TemporalAbstractionRequest>

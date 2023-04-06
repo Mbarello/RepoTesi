@@ -1,5 +1,6 @@
 package View;
 
+import javafx.util.converter.LocalDateTimeStringConverter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,51 +12,29 @@ import java.util.*;
 
 public class ReadCSVFile {
 
-    public static LinkedHashMap<LocalDateTime,Float> readFile(File file) {
+    public static LinkedHashMap<Float, LocalDateTime> readFile(File file) {
 
-        LinkedHashMap<LocalDateTime,Float> risultati = new LinkedHashMap<>();
-        ArrayList<Integer> cont=new ArrayList<Integer>();
+        LinkedHashMap<Float, LocalDateTime> risultati = new LinkedHashMap<>();
         String csvSplitBy = ",";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        try (BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
-            String line;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
 
-            int i=0;
+        try (BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+
+            String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(csvSplitBy);
                 String timeString = data[0];
                 String[] orario = timeString.split(" ");
-                String[] orario2 = orario[1].split("\\.");
-                String ora = orario2[0];
+                String ora = orario[1];
 
                 try {
-
                     LocalTime time = LocalTime.parse(ora, formatter);
                     LocalDate today = LocalDate.now();
                     LocalDateTime dateTime = LocalDateTime.of(today, time);
-                    if(!risultati.containsKey(dateTime)){
-                        cont.add(1);
-                    }
-                    if(risultati.containsKey(dateTime)){
-                        int p =posizioneChiave(risultati,dateTime);
-                        //TROVO POSIZIONE CHIAVE
-                        risultati.put(dateTime,Float.parseFloat(data[4])+risultati.get(dateTime)); //sommo i float
-                        cont.set(p,cont.get(p)+1); //aggiorno il numero di volte che ho trovato una data
-                    }
-                    else{
-                        risultati.put(dateTime,Float.parseFloat(data[4]));
-                        i++;
-                    }
-
+                    risultati.put(Float.parseFloat(data[4]), dateTime);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            i=0;
-            //faccio la media
-            for(LocalDateTime l : risultati.keySet()){
-                risultati.put(l,risultati.get(l)/cont.get(i));
-                i++;
             }
 
         } catch (Exception e) {
@@ -63,21 +42,8 @@ public class ReadCSVFile {
         }
 
         return sortHashMapByDateTime(risultati);
-
     }
 
-    private static int posizioneChiave(LinkedHashMap<LocalDateTime, Float> risultati, LocalDateTime dateTime) {
-        int p=0;
-        int posizione=0;
-        for (LocalDateTime l : risultati.keySet()){
-            if(l.isEqual(dateTime)){
-                posizione=p;
-            }
-            p++;
-        }
-        return posizione;
-    }
-/*
     //Ordinamento dati file pdf (i dati non sono in ordine cronologico)
     public static LinkedHashMap<Float, LocalDateTime> sortHashMapByDateTime(HashMap<Float, LocalDateTime> map) {
         List<Map.Entry<Float, LocalDateTime>> list = new LinkedList<>(map.entrySet());
@@ -93,67 +59,22 @@ public class ReadCSVFile {
         }
         return sortedMap;
     }
- */
 
-    public static LinkedHashMap<LocalDateTime,Float> ritornaData(File file) {
-        LinkedHashMap<LocalDateTime,Float> mapData = new LinkedHashMap<>();
+    public static HashMap<LocalDateTime,Float> ritornaData(File file) {
+        HashMap<LocalDateTime,Float> mapData = new HashMap<>();
         String csvSplitBy = ",";
-        ArrayList<Integer> cont=new ArrayList<Integer>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
 
             String line;
-            int i=0;
             while ((line = br.readLine()) != null) {
-
                 String[] data = line.split(csvSplitBy);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-                String[] d =data[0].split("\\.");
-                LocalDateTime Data=LocalDateTime.parse(d[0],formatter);
-
-                if(!mapData.containsKey(Data)){
-                    cont.add(1);
-                }
-                if(mapData.containsKey(Data)){
-                    int p =posizioneChiave(mapData,Data);
-                    //TROVO POSIZIONE CHIAVE
-                    mapData.put(Data,Float.parseFloat(data[4])+mapData.get(Data)); //sommo i float
-                    cont.set(p,cont.get(p)+1); //aggiorno il numero di volte che ho trovato una data
-                }
-                else{
-                    mapData.put(Data,Float.parseFloat(data[4]));
-                    i++;
-                }
-
-
-            }
-            i=0;
-            //faccio la media
-            for(LocalDateTime l : mapData.keySet()){
-                mapData.put(l,mapData.get(l)/cont.get(i));
-                i++;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                mapData.put(LocalDateTime.parse(data[0],formatter), Float.parseFloat(data[4]));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return sortHashMapByDateTime(mapData);
-
+        return mapData;
     }
-
-    public static LinkedHashMap<LocalDateTime, Float> sortHashMapByDateTime(HashMap<LocalDateTime, Float> map) {
-        List<Map.Entry<LocalDateTime, Float>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<LocalDateTime, Float>>() {
-            public int compare(Map.Entry<LocalDateTime, Float> o1, Map.Entry<LocalDateTime, Float> o2) {
-                return o1.getKey().compareTo(o2.getKey());
-            }
-        });
-
-        LinkedHashMap<LocalDateTime, Float> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<LocalDateTime, Float> entry : list) {
-            sortedMap.put(entry.getKey(), entry.getValue());
-        }
-        return sortedMap;
-    }
-
-
 }
