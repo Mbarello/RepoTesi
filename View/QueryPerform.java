@@ -22,7 +22,7 @@ public class QueryPerform {
             DefaultTempoFacade tempoFacade = new DefaultTempoFacade();
             Document doc = tempoFacade.performTemporalAbstraction(jdomDoc);
 
-            File file = new File("C:\\Users\\lolli\\OneDrive\\Desktop\\Università\\Tesi\\RepoTesi\\View\\risposta.xml");
+            File file = new File("C:\\Users\\beneg\\OneDrive\\Desktop\\RepoTesi\\View\\risposta.xml");
             file.getParentFile().mkdirs();
             file.createNewFile();
 

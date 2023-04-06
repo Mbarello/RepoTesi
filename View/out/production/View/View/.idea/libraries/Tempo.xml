@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Tempo">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Tempo/Tempo.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Materiale per Temporal Abstractions/Tempo/Tempo/Tempo.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../Tempo/Tempo.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

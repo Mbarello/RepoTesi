@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jdom">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Librerie/jdom-b9/build/jdom.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TESI/Librerie/jdom.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
