@@ -1,9 +1,13 @@
 package View;
 
+import javafx.scene.Node;
 import org.jfree.chart.*;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -18,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
@@ -54,7 +60,7 @@ public class Grafico extends JPanel implements ActionListener {
     private JLabel minRateLabel;
     private JLabel maxRateLabel;
     private final JButton creaQuery;
-    private LinkedHashMap<Float, LocalDateTime> risultati;
+    private LinkedHashMap<LocalDateTime,Float> risultati;
     private JLabel selectedFileLabel;
     private JComboBox selezionaScelta;
     private final JFrame frame;
@@ -62,7 +68,6 @@ public class Grafico extends JPanel implements ActionListener {
     private JFileChooser fileChooser = new JFileChooser();
     private JTextField maxOscMarginField;
     private JLabel maxOscMarginLabel;
-    private File risposta;
 
     public Grafico() {
         // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
@@ -74,7 +79,7 @@ public class Grafico extends JPanel implements ActionListener {
         // Genera il frame principale
         this.frame = new JFrame("Grafico");
         this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.frame.setMinimumSize(new Dimension(600, 800));
+        this.frame.setMinimumSize(new Dimension(600,800));
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.frame.setLayout(new BorderLayout());
 
@@ -277,7 +282,7 @@ public class Grafico extends JPanel implements ActionListener {
             this.localWinField.setVisible(true);
             this.maxOscMarginField.setVisible(false);
             this.maxOscMarginLabel.setVisible(false);
-            if (this.selezionaOrdine.getSelectedItem() == "Stazionario") {
+            if(this.selezionaOrdine.getSelectedItem() == "Stazionario") {
                 this.maxOscMarginField.setVisible(true);
                 this.maxOscMarginLabel.setVisible(true);
                 this.minRateLabel.setVisible(false);
@@ -375,14 +380,7 @@ public class Grafico extends JPanel implements ActionListener {
 
                 try {
                     Query query = new Query();
-                    this.risposta = query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
-                    if (risposta.exists()) {
-                        QueryPerform queryPerform = new QueryPerform();
-                        queryPerform.queryPerform(risposta);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Query non creata", "Errore", JOptionPane.ERROR_MESSAGE);
-
-                    }
+                    query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
                 } catch (XMLStreamException | TransformerException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -390,14 +388,7 @@ public class Grafico extends JPanel implements ActionListener {
             if (Objects.equals(this.selezionaScelta.getSelectedItem(), "Stato")) {
                 try {
                     Query query = new Query();
-                    this.risposta = query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
-                    if (risposta.exists()) {
-                        QueryPerform queryPerform = new QueryPerform();
-                        queryPerform.queryPerform(risposta);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Query non creata", "Errore", JOptionPane.ERROR_MESSAGE);
-
-                    }
+                    query.creaQuery(this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
                 } catch (XMLStreamException | IOException | TransformerException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -509,17 +500,16 @@ public class Grafico extends JPanel implements ActionListener {
         //trovo il DT da sottrarre a ogni vaore sull'asse x per fare iniziare il nostro grafico al tempo 0
         LocalDateTime primaData = null;
 
-        for (Float key : risultati.keySet()) {
+        for (LocalDateTime key : risultati.keySet()) {
             if (primaData == null) {
-                primaData = risultati.get(key);
+                primaData = key;
             }
             break;
         }
-
-        for (Float key : risultati.keySet()) {
-            LocalDateTime value = risultati.get(key);
+        for (LocalDateTime key  : risultati.keySet()) {
+            LocalDateTime value = key;
             long seconds = ChronoUnit.SECONDS.between(primaData, value);
-            serie.add(seconds, key);
+            serie.add(seconds, risultati.get(key));
         }
     }
 
