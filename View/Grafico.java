@@ -393,7 +393,7 @@ public class Grafico extends JPanel implements ActionListener {
             if (Objects.equals(this.selezionaScelta.getSelectedItem(), "Stato")) {
                 try {
                     Query query = new Query();
-                    this.risposta =query.creaQuery(Objects.requireNonNull(this.selezionaOrdine.getSelectedItem()).toString(), this.minDurationField.getText(), this.maxTimeGapField.getText(), this.minRateField.getText(), this.maxRateField.getText(), this.localWinField.getText(), fileChooser.getSelectedFile(), this.maxOscMarginField.getText());
+                    this.risposta =query.creaQuery(this.minDurationStatoField.getText(), this.maxTimeGapStatoField.getText(), this.minThresholdField.getText(), this.maxThresholdField.getText(), fileChooser.getSelectedFile());
                     if (this.risposta.exists()) {
                         QueryPerform queryPerform = new QueryPerform();
                         queryPerform.queryPerform(this.risposta);
@@ -519,6 +519,7 @@ public class Grafico extends JPanel implements ActionListener {
             long seconds = ChronoUnit.SECONDS.between(primaData, value);
             serie.add(seconds, risultati.get(key));
         }
+        System.out.println(this.risultati.get(LocalDateTime.of(2023,04,06,05,18,40)));
     }
 
     public static void main(String[] args) {

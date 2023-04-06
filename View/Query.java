@@ -47,7 +47,7 @@ public class Query {
         if (Objects.equals(trend, "Fortemente Decrescente") || Objects.equals(trend, "Decrescente") || Objects.equals(trend, "Crescente") || Objects.equals(trend, "Fortemente crescente")) {
             // AbstractionTrend
             xmlWriter.writeStartElement("AbstractionTrend");
-            xmlWriter.writeAttribute("temporalUnit", "minute");
+            xmlWriter.writeAttribute("temporalUnit", "second");
             xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
             switch (trend) {
                 case "Fortemente Decrescente":
@@ -68,7 +68,7 @@ public class Query {
             xmlWriter.writeAttribute("localWin", localWindow);
         } else {
             xmlWriter.writeStartElement("AbstractionStationary");
-            xmlWriter.writeAttribute("temporalUnit", "minute");
+            xmlWriter.writeAttribute("temporalUnit", "second");
             xmlWriter.writeAttribute("maximumTimeGap", maxTimeGap);
             xmlWriter.writeAttribute("maxRate", maxRateField);
             xmlWriter.writeAttribute("maxOscillationMargin", maxOscillation);
