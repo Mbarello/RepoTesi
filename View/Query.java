@@ -24,8 +24,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 public class Query {
 
-    private HashMap<LocalDateTime, Float> risultati;
-    private static HashMap<LocalDateTime, Float> risultati1;
+    private LinkedHashMap<LocalDateTime, Float> risultati;
+    private static LinkedHashMap<LocalDateTime, Float> risultati1;
 
     public static void main(String[] args) {
     }
@@ -113,7 +113,9 @@ public class Query {
         xmlWriter.writeEndElement(); // DataInfo
 
         xmlWriter.writeStartElement("NumericDataSeries");
-        this.risultati = ReadCSVFile.ritornaData(file);
+        this.risultati =ReadCSVFile.ritornaData(file);
+
+
         for (LocalDateTime d : risultati.keySet()) {
             xmlWriter.writeStartElement("NumericaData");
             xmlWriter.writeStartElement("DateTimeSecond");
@@ -150,6 +152,8 @@ public class Query {
         bw.write(xml);
         bw.close();
     }
+
+
     public void creaQuery(String minDuration, String maxTimeGap, String minThreshold, String maxThreshold, File file) throws XMLStreamException, IOException, TransformerException {
         StringWriter sw = new StringWriter();
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
@@ -276,11 +280,6 @@ public class Query {
         bw.write(xml);
         bw.close();
     }
-
-
-
-
-
 
 }
 

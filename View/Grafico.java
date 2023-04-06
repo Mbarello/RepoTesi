@@ -60,7 +60,7 @@ public class Grafico extends JPanel implements ActionListener {
     private JLabel minRateLabel;
     private JLabel maxRateLabel;
     private final JButton creaQuery;
-    private LinkedHashMap<Float, LocalDateTime> risultati;
+    private LinkedHashMap<LocalDateTime,Float> risultati;
     private JLabel selectedFileLabel;
     private JComboBox selezionaScelta;
     private final JFrame frame;
@@ -500,17 +500,16 @@ public class Grafico extends JPanel implements ActionListener {
         //trovo il DT da sottrarre a ogni vaore sull'asse x per fare iniziare il nostro grafico al tempo 0
         LocalDateTime primaData = null;
 
-        for (Float key : risultati.keySet()) {
+        for (LocalDateTime key : risultati.keySet()) {
             if (primaData == null) {
-                primaData = risultati.get(key);
+                primaData = key;
             }
             break;
         }
-
-        for (Float key : risultati.keySet()) {
-            LocalDateTime value = risultati.get(key);
+        for (LocalDateTime key  : risultati.keySet()) {
+            LocalDateTime value = key;
             long seconds = ChronoUnit.SECONDS.between(primaData, value);
-            serie.add(seconds, key);
+            serie.add(seconds, risultati.get(key));
         }
     }
 
