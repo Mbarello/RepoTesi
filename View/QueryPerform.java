@@ -16,13 +16,14 @@ public class QueryPerform {
 
     public void queryPerform(File xmlFile){
         try {
+            String path = System.getProperty("user.dir") + "/src/dati/";
             SAXBuilder saxBuilder = new SAXBuilder();
             Document jdomDoc = saxBuilder.build(xmlFile);
 
             DefaultTempoFacade tempoFacade = new DefaultTempoFacade();
             Document doc = tempoFacade.performTemporalAbstraction(jdomDoc);
 
-            File file = new File("C:\\Users\\beneg\\OneDrive\\Desktop\\RepoTesi\\View\\risposta.xml");
+            File file = new File(path + "risposta.xml");
             file.getParentFile().mkdirs();
             file.createNewFile();
 
