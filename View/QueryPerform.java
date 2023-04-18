@@ -16,7 +16,7 @@ public class QueryPerform {
 
     public void queryPerform(File xmlFile){
         try {
-            String path = System.getProperty("user.dir") + "/src/dati/";
+            String path = System.getProperty("user.dir") + "/risposta/";
             SAXBuilder saxBuilder = new SAXBuilder();
             Document jdomDoc = saxBuilder.build(xmlFile);
 

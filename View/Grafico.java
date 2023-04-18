@@ -1,8 +1,12 @@
 package View;
 
+import javafx.geometry.HorizontalDirection;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollBar;
 import org.jfree.chart.*;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
@@ -15,9 +19,7 @@ import javax.swing.*;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -446,7 +448,8 @@ public class Grafico extends JPanel implements ActionListener {
         xAxis.setAutoRange(false);
         int start = 0;
         int end = 200;
-        xAxis.setRange(start, end);
+        xAxis.setRange(start,end);
+
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(800, 400));
@@ -454,6 +457,7 @@ public class Grafico extends JPanel implements ActionListener {
         chartPanel.setRangeZoomable(false);
         chartPanel.setMouseWheelEnabled(true);
         chartPanel.setMouseZoomable(true, false);
+
         chartPanel.addChartMouseListener(new ChartMouseListener() {
             // Implementa il metodo chartMouseClicked
             public void chartMouseClicked(ChartMouseEvent event) {
@@ -481,22 +485,26 @@ public class Grafico extends JPanel implements ActionListener {
                 // Metodo non utilizzato in questo esempio
             }
         });
+        JScrollBar scrollBar = new JScrollBar(JScrollBar.HORIZONTAL, 0, 1, 0, 6700);
+        scrollBar.addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                int scrollValue = e.getValue();
+                for (int i = scrollValue; i < 6700; i++){
+                    plot.getDomainAxis().setRange(scrollValue, scrollValue+100);
+                }
+            }
+        });
 
+        JPanel chartPanelWithScrollbar = new JPanel(new BorderLayout());
+        chartPanelWithScrollbar.add(chartPanel, BorderLayout.CENTER);
+        chartPanelWithScrollbar.add(scrollBar, BorderLayout.SOUTH);
 
-        JScrollPane scrollPane = new JScrollPane(chartPanel);
-        if (chartPanel.getPreferredSize().width > 800) {
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        } else {
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        }
-        JScrollBar scrollBar = new JScrollBar(JScrollBar.HORIZONTAL, start, end - start, 0, 1000);
-        scrollBar.addAdjustmentListener(e1 -> xAxis.setRange(e1.getValue(), e1.getValue() + end - start));
-        scrollPane.setHorizontalScrollBar(scrollBar);
-
+// Aggiungi il nuovo pannello al contenuto della finestra
         JFrame frame1 = new JFrame("Line Chart Example");
-        frame1.add(scrollPane);
+        frame1.setContentPane(chartPanelWithScrollbar);
         frame1.pack();
         frame1.setVisible(true);
+
     }
 
     public void ordinaDati(XYSeries serie) {
@@ -519,7 +527,6 @@ public class Grafico extends JPanel implements ActionListener {
             long seconds = ChronoUnit.SECONDS.between(primaData, value);
             serie.add(seconds, risultati.get(key));
         }
-        System.out.println(this.risultati.get(LocalDateTime.of(2023,04,06,05,18,40)));
     }
 
     public static void main(String[] args) {
