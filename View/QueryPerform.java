@@ -31,7 +31,7 @@ public class QueryPerform {
             XMLOutputter xmlOutput = new XMLOutputter();
 
             // Imposta il formato di output
-            Format format = Format.getPrettyFormat();
+            Format format = Format.getCompactFormat();
             format.setEncoding("UTF-8");
 
             // Scrivi il contenuto del documento nel file
