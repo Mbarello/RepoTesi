@@ -37,6 +37,8 @@ public class QueryPerform {
             // Scrivi il contenuto del documento nel file
             FileOutputStream fos = new FileOutputStream(file);
             xmlOutput.output(doc, fos);
+            RecuperaDati rec = new RecuperaDati();
+            rec.RecuperaDati(path);
             fos.flush();
             fos.close();
         } catch (IOException e) {
