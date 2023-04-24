@@ -1,27 +1,26 @@
 package View;
 
 import java.io.File;
-import java.net.InetSocketAddress;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
-import com.sun.glass.ui.Clipboard;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
 public class RecuperaDati {
-    private ArrayList<Intervallo> listaIntervalli = new ArrayList<>();
+    private final ArrayList<Intervallo> listaIntervalli = new ArrayList<>();
 
-    public void RecuperaDati(String pathname) {
+    public ArrayList<Intervallo> RecuperaDati(String pathname) {
         try {
             // Open XML file
-            File file = new File(pathname+"risposta.xml");
+            File file = new File(pathname + "risposta.xml");
 
             // Create DOM parser
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -55,31 +54,31 @@ public class RecuperaDati {
                             if (dateTimeSecondNode != null && dateTimeSecondNode.getNodeName().equals("DateTimeSecond")) {
                                 NamedNodeMap attributi = dateTimeSecondNode.getAttributes();
 
-                                    String yearLower = attributi.getNamedItem("year").getNodeValue();
-                                    String monthLower = attributi.getNamedItem("month").getNodeValue();
-                                    String dayLower = attributi.getNamedItem("day").getNodeValue();
-                                    String hourLower = attributi.getNamedItem("hour").getNodeValue();
-                                    String minuteLower = attributi.getNamedItem("minute").getNodeValue();
-                                    String secondLower = attributi.getNamedItem("second").getNodeValue();
+                                String yearLower = attributi.getNamedItem("year").getNodeValue();
+                                String monthLower = attributi.getNamedItem("month").getNodeValue();
+                                String dayLower = attributi.getNamedItem("day").getNodeValue();
+                                String hourLower = attributi.getNamedItem("hour").getNodeValue();
+                                String minuteLower = attributi.getNamedItem("minute").getNodeValue();
+                                String secondLower = attributi.getNamedItem("second").getNodeValue();
                                 if (Integer.parseInt(monthLower) < 10) {
-                                    monthLower = "0"+monthLower;
+                                    monthLower = "0" + monthLower;
                                 }
                                 if (Integer.parseInt(dayLower) < 10) {
                                     dayLower = "0" + dayLower;
                                 }
-                                if (Integer.parseInt(hourLower)<10) {
-                                    hourLower="0" + hourLower;
+                                if (Integer.parseInt(hourLower) < 10) {
+                                    hourLower = "0" + hourLower;
                                 }
-                                if (Integer.parseInt(minuteLower) < 10 ) {
+                                if (Integer.parseInt(minuteLower) < 10) {
                                     minuteLower = "0" + minuteLower;
                                 }
                                 if (Integer.parseInt(secondLower) < 10) {
                                     secondLower = "0" + secondLower;
                                 }
-                                    String dataLowerString = yearLower + "-" + monthLower + "-" + dayLower + " " + hourLower + ":" + minuteLower + ":" + secondLower;
-                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                                    LocalDateTime data = LocalDateTime.parse(dataLowerString, formatter);
-                                    intervallo.setInizio(data);
+                                String dataLowerString = yearLower + "-" + monthLower + "-" + dayLower + " " + hourLower + ":" + minuteLower + ":" + secondLower;
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                LocalDateTime data = LocalDateTime.parse(dataLowerString, formatter);
+                                intervallo.setInizio(data);
                             }
                         }
                     }
@@ -102,15 +101,15 @@ public class RecuperaDati {
                                 String minuteUpper = attributi.getNamedItem("minute").getNodeValue();
                                 String secondUpper = attributi.getNamedItem("second").getNodeValue();
                                 if (Integer.parseInt(monthUpper) < 10) {
-                                    monthUpper = "0"+monthUpper;
+                                    monthUpper = "0" + monthUpper;
                                 }
                                 if (Integer.parseInt(dayUpper) < 10) {
                                     dayUpper = "0" + dayUpper;
                                 }
-                                if (Integer.parseInt(hourUpper)<10) {
-                                    hourUpper="0" + hourUpper;
+                                if (Integer.parseInt(hourUpper) < 10) {
+                                    hourUpper = "0" + hourUpper;
                                 }
-                                if (Integer.parseInt(minuteUpper) < 10 ) {
+                                if (Integer.parseInt(minuteUpper) < 10) {
                                     minuteUpper = "0" + minuteUpper;
                                 }
                                 if (Integer.parseInt(secondUpper) < 10) {
@@ -121,7 +120,7 @@ public class RecuperaDati {
                                 LocalDateTime data = LocalDateTime.parse(dataUpperString, formatter);
                                 intervallo.setFine(data);
                             }
-                            listaIntervalli.add(intervallo);
+                            this.listaIntervalli.add(intervallo);
                         }
                     }
                 }
@@ -130,5 +129,6 @@ public class RecuperaDati {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return this.listaIntervalli;
     }
 }

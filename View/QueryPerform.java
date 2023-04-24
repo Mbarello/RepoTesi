@@ -11,8 +11,10 @@ import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class QueryPerform {
+    ArrayList<Intervallo> listaIntervalli;
 
     public void queryPerform(File xmlFile){
         try {
@@ -38,7 +40,7 @@ public class QueryPerform {
             FileOutputStream fos = new FileOutputStream(file);
             xmlOutput.output(doc, fos);
             RecuperaDati rec = new RecuperaDati();
-            rec.RecuperaDati(path);
+            this.listaIntervalli = rec.RecuperaDati(path);
             fos.flush();
             fos.close();
         } catch (IOException e) {
