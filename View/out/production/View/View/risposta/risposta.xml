@@ -2,12 +2,12 @@
 <TemporalAbstractionResponse><Responses><Response dataID="admin-1090086105593"><Abstraction minDuration="0">
       <AbstractionInfo>
         <Comment />
-        <DateTimeSecond year="2023" month="4" day="17" hour="15" minute="9" second="45" />
+        <DateTimeSecond year="2023" month="4" day="19" hour="16" minute="56" second="2" />
       </AbstractionInfo>
       <AbstractionState temporalUnit="minute" maximumTimeGap="0">
         <ThresholdsList>
-          <Threshold name="T01" max="0" />
-          <Thresholds name="T02" max="0" />
+          <Threshold name="T01" max="1.20" />
+          <Thresholds name="T02" max="1.50" />
           <Thresholds name="T03" max="" />
         </ThresholdsList>
         <Conditions>
@@ -21,7 +21,7 @@
     </Abstraction><Data>
       <DataInfo id="admin-1090086105593">
         <Comment>query</Comment>
-        <DateTimeSecond year="2023" month="4" day="17" hour="15" minute="9" second="45" />
+        <DateTimeSecond year="2023" month="4" day="19" hour="16" minute="56" second="2" />
       </DataInfo>
       <NumericDataSeries>
         <NumericData>
@@ -27069,4 +27069,4 @@
           <Adimensional value="1.0254008" precision="float" />
         </NumericData>
       </NumericDataSeries>
-    </Data><TimeIntervals /></Response></Responses></TemporalAbstractionResponse>
+    </Data><TimeIntervals><DateTimeInterval><Lower><DateTimeSecond year="2023" month="1" day="1" hour="4" minute="30" second="2" /></Lower><Upper><DateTimeSecond year="2023" month="1" day="1" hour="4" minute="30" second="2" /></Upper></DateTimeInterval><DateTimeInterval><Lower><DateTimeSecond year="2023" month="1" day="1" hour="5" minute="19" second="43" /></Lower><Upper><DateTimeSecond year="2023" month="1" day="1" hour="5" minute="19" second="43" /></Upper></DateTimeInterval></TimeIntervals></Response></Responses></TemporalAbstractionResponse>

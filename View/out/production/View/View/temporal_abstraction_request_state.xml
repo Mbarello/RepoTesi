@@ -2,18 +2,18 @@
 <TemporalAbstractionRequest>
   <RequestInfo>
     <user>admin</user>
-    <DateTimeSecond year="2023" month="4" day="25" hour="19" minute="10" second="12"></DateTimeSecond>
+    <DateTimeSecond year="2023" month="4" day="19" hour="16" minute="56" second="2"></DateTimeSecond>
   </RequestInfo>
   <Abstractions>
     <Abstraction minDuration="0">
       <AbstractionInfo>
         <Comment></Comment>
-        <DateTimeSecond year="2023" month="4" day="25" hour="19" minute="10" second="12"></DateTimeSecond>
+        <DateTimeSecond year="2023" month="4" day="19" hour="16" minute="56" second="2"></DateTimeSecond>
       </AbstractionInfo>
       <AbstractionState temporalUnit="minute" maximumTimeGap="0">
         <ThresholdsList>
-          <Threshold name="T01" max="1.02"></Threshold>
-          <Thresholds name="T02" max="3"></Thresholds>
+          <Threshold name="T01" max="1.20"></Threshold>
+          <Thresholds name="T02" max="1.50"></Thresholds>
           <Thresholds name="T03" max=""></Thresholds>
         </ThresholdsList>
         <Conditions>
@@ -30,7 +30,7 @@
     <Data>
       <DataInfo id="admin-1090086105593">
         <Comment>query</Comment>
-        <DateTimeSecond year="2023" month="4" day="25" hour="19" minute="10" second="12"></DateTimeSecond>
+        <DateTimeSecond year="2023" month="4" day="19" hour="16" minute="56" second="2"></DateTimeSecond>
       </DataInfo>
       <NumericDataSeries>
         <NumericData>

@@ -4,16 +4,16 @@
     <Abstraction minDuration="0">
       <AbstractionInfo>
         <Comment></Comment>
-        <DateTimeSecond year="2023" month="4" day="14" hour="15" minute="52" second="43"></DateTimeSecond>
+        <DateTimeSecond year="2023" month="4" day="24" hour="10" minute="0" second="36"></DateTimeSecond>
       </AbstractionInfo>
-      <AbstractionStationary temporalUnit="second" maximumTimeGap="0" maxRate="0.0" maxOscillationMargin="0"></AbstractionStationary>
+      <AbstractionTrend temporalUnit="second" maximumTimeGap="0" trend="inc" minRate="0.0" maxRate="0.0" localWin="0"></AbstractionTrend>
     </Abstraction>
   </Abstractions>
   <Series>
     <Data>
       <DataInfo id="admin-1090086105593">
         <Comment>query</Comment>
-        <DateTimeSecond year="2023" month="4" day="14" hour="15" minute="52" second="43"></DateTimeSecond>
+        <DateTimeSecond year="2023" month="4" day="24" hour="10" minute="0" second="36"></DateTimeSecond>
       </DataInfo>
       <NumericDataSeries>
         <NumericaData>
