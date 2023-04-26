@@ -31,8 +31,7 @@ public class ReadCSVFile {
                 try {
 
                     LocalTime time = LocalTime.parse(ora, formatter);
-                    LocalDate today = LocalDate.now();
-                    LocalDateTime dateTime = LocalDateTime.of(today, time);
+                    LocalDateTime dateTime = LocalDateTime.of(LocalDate.parse(orario[0]), time);
                     if(!risultati.containsKey(dateTime)){
                         cont.add(1);
                     }

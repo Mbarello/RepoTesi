@@ -1,19 +1,19 @@
 <?xml version="1.0" ?>
 <TemporalAbstractionRequest>
   <Abstractions>
-    <Abstraction minDuration="0">
+    <Abstraction minDuration="300000">
       <AbstractionInfo>
         <Comment></Comment>
-        <DateTimeSecond year="2023" month="4" day="24" hour="10" minute="0" second="36"></DateTimeSecond>
+        <DateTimeSecond year="2023" month="4" day="24" hour="10" minute="14" second="33"></DateTimeSecond>
       </AbstractionInfo>
-      <AbstractionTrend temporalUnit="second" maximumTimeGap="0" trend="inc" minRate="0.0" maxRate="0.0" localWin="0"></AbstractionTrend>
+      <AbstractionTrend temporalUnit="second" maximumTimeGap="120" trend="dec" minRate="0.100000001" maxRate="0.289999992" localWin="120"></AbstractionTrend>
     </Abstraction>
   </Abstractions>
   <Series>
     <Data>
       <DataInfo id="admin-1090086105593">
         <Comment>query</Comment>
-        <DateTimeSecond year="2023" month="4" day="24" hour="10" minute="0" second="36"></DateTimeSecond>
+        <DateTimeSecond year="2023" month="4" day="24" hour="10" minute="14" second="33"></DateTimeSecond>
       </DataInfo>
       <NumericDataSeries>
         <NumericaData>

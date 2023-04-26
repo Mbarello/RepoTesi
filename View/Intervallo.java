@@ -13,7 +13,7 @@ public class Intervallo {
 
     public Intervallo(){}
     public LocalDateTime getInizio() {
-        return inizio;
+        return this.inizio;
     }
 
     public void setInizio(LocalDateTime inizio) {
@@ -21,7 +21,7 @@ public class Intervallo {
     }
 
     public LocalDateTime getFine() {
-        return fine;
+        return this.fine;
     }
 
     public void setFine(LocalDateTime fine) {

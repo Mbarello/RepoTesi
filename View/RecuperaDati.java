@@ -60,8 +60,9 @@ public class RecuperaDati {
                                 String hourLower = attributi.getNamedItem("hour").getNodeValue();
                                 String minuteLower = attributi.getNamedItem("minute").getNodeValue();
                                 String secondLower = attributi.getNamedItem("second").getNodeValue();
+                                Integer monthLowerInt = Integer.parseInt(monthLower) + 1;
                                 if (Integer.parseInt(monthLower) < 10) {
-                                    monthLower = "0" + monthLower;
+                                    monthLower = "0" + monthLowerInt;
                                 }
                                 if (Integer.parseInt(dayLower) < 10) {
                                     dayLower = "0" + dayLower;
@@ -100,8 +101,10 @@ public class RecuperaDati {
                                 String hourUpper = attributi.getNamedItem("hour").getNodeValue();
                                 String minuteUpper = attributi.getNamedItem("minute").getNodeValue();
                                 String secondUpper = attributi.getNamedItem("second").getNodeValue();
-                                if (Integer.parseInt(monthUpper) < 10) {
-                                    monthUpper = "0" + monthUpper;
+                                Integer monthUpperInt = Integer.parseInt(monthUpper) + 1;
+
+                                if (monthUpperInt < 10) {
+                                    monthUpper = "0" + monthUpperInt;
                                 }
                                 if (Integer.parseInt(dayUpper) < 10) {
                                     dayUpper = "0" + dayUpper;

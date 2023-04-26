@@ -1,17 +1,10 @@
 package View;
 
-import javafx.geometry.HorizontalDirection;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
-import javafx.scene.control.ScrollBar;
 import org.jfree.chart.*;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -20,14 +13,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class Grafico extends JPanel implements ActionListener {
     private JLabel parametriOrdinamentoStatoLabel;
@@ -71,6 +62,8 @@ public class Grafico extends JPanel implements ActionListener {
     private JTextField maxOscMarginField;
     private JLabel maxOscMarginLabel;
     private File risposta;
+    private ArrayList<Intervallo> rispostaQuery;
+    private XYSeriesCollection dataset1;
 
     public Grafico() {
         // Imposta il look and feel Nimbus per migliorare l'aspetto del file chooser
@@ -415,11 +408,101 @@ public class Grafico extends JPanel implements ActionListener {
         // Creazione della serie di dati
         XYSeries serie = new XYSeries("Dati di esempio");
 
-        this.ordinaDati(serie);
+        LocalDateTime DT = this.ordinaDati(serie); //DT da sottrarre ale serie trovate come risultato per rendere il grafico compatibile
 
         // Creazione della collezione di serie
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(serie);
+
+        String path = System.getProperty("user.dir") + "/risposta/";
+        RecuperaDati RD = new RecuperaDati();
+        this.rispostaQuery = RD.RecuperaDati(path);
+
+        this.dataset1 = new XYSeriesCollection();
+        this.aggiungiSerie(this.rispostaQuery, DT);
+        JFreeChart chart1 = ChartFactory.createXYLineChart(
+                "Grafico a linee", // Titolo del grafico
+                "X", // Etichetta asse X
+                "Y", // Etichetta asse Y
+                this.dataset1, // Collezione di serie
+                PlotOrientation.VERTICAL, // Orientamento del grafico
+                false, // Mostra legenda
+                true, // Mostra tooltip
+                false // Mostra URL
+        );
+
+        chart1.setBackgroundPaint(Color.white);
+        XYPlot plot1 = chart1.getXYPlot();
+
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesLinesVisible(0, true);
+        renderer.setSeriesShapesVisible(0, true);
+        renderer.setSeriesShape(0, new Ellipse2D.Double(-2.5, -2.5, 5, 5)); // Imposta la forma dei punti (in questo caso, un cerchio con raggio 2.5)
+        plot1.setRenderer(renderer);
+
+        plot1.setDomainPannable(true);
+        plot1.setRangePannable(true);
+        plot1.setDomainZeroBaselineVisible(true);
+        plot1.setBackgroundPaint(Color.lightGray);
+        plot1.setDomainGridlinePaint(Color.white);
+        plot1.setRangeGridlinePaint(Color.white);
+
+
+        NumberAxis xAxis1 = (NumberAxis) plot1.getDomainAxis();
+        xAxis1.setAutoRange(true);
+        int start1 = 0;
+        int end1 = 200;
+        xAxis1.setRange(start1, end1);
+
+
+        ChartPanel chartPanel1 = new ChartPanel(chart1);
+        chartPanel1.setPreferredSize(new Dimension(800, 400));
+        chartPanel1.setDomainZoomable(true);
+        chartPanel1.setRangeZoomable(false);
+        chartPanel1.setMouseWheelEnabled(true);
+        chartPanel1.setMouseZoomable(true, false);
+
+        chartPanel1.addChartMouseListener(new ChartMouseListener() {
+            // Implementa il metodo chartMouseClicked
+            public void chartMouseClicked(ChartMouseEvent event) {
+                // Verifica se è stato premuto il pulsante sinistro del mouse
+                if (event.getTrigger().getButton() == MouseEvent.BUTTON1) {
+                    // Calcola la nuova posizione dell'asse X
+                    double x = plot1.getDomainAxis().java2DToValue(event.getTrigger().getX(),
+                            chartPanel1.getScreenDataArea(), plot1.getDomainAxisEdge());
+
+                    // Calcola la nuova posizione dell'asse Y
+                    double y = plot1.getRangeAxis().java2DToValue(event.getTrigger().getY(),
+                            chartPanel1.getScreenDataArea(), plot1.getRangeAxisEdge());
+
+                    // Calcola la larghezza e l'altezza dell'area visibile del grafico
+                    double width = plot1.getDomainAxis().getRange().getLength();
+                    double height = plot1.getRangeAxis().getRange().getLength();
+
+                    // Imposta il nuovo range dell'asse X e dell'asse Y in base alla nuova posizione
+                    plot1.getDomainAxis().setRange(x - width / 2, x + width / 2);
+                    plot1.getRangeAxis().setRange(y - height / 2, y + height / 2);
+                }
+            }
+
+            public void chartMouseMoved(ChartMouseEvent event) {
+                // Metodo non utilizzato in questo esempio
+            }
+        });
+        JScrollBar scrollBar1 = new JScrollBar(JScrollBar.HORIZONTAL, 0, 1, 0, 6700);
+        scrollBar1.addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                int scrollValue1 = e.getValue();
+                for (int i = scrollValue1; i < 6700; i++) {
+                    plot1.getDomainAxis().setRange(scrollValue1, scrollValue1 + 100);
+                }
+            }
+        });
+
+        JPanel chartPanelWithScrollbar1 = new JPanel(new BorderLayout());
+        chartPanelWithScrollbar1.add(chartPanel1, BorderLayout.CENTER);
+        chartPanelWithScrollbar1.add(scrollBar1, BorderLayout.SOUTH);
+
 
         // Creazione del grafico
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -436,6 +519,7 @@ public class Grafico extends JPanel implements ActionListener {
         // Personalizzazione del grafico
         chart.setBackgroundPaint(Color.white);
         XYPlot plot = chart.getXYPlot();
+        plot.getRenderer().setSeriesPaint(0, Color.BLACK);
 
         plot.setDomainPannable(true);
         plot.setRangePannable(true);
@@ -502,19 +586,23 @@ public class Grafico extends JPanel implements ActionListener {
 
 // Aggiungi il nuovo pannello al contenuto della finestra
         JFrame frame1 = new JFrame("Line Chart Example");
+        JFrame frame2 = new JFrame("Line Chart Example 2");
         frame1.setContentPane(chartPanelWithScrollbar);
+        frame2.setContentPane(chartPanelWithScrollbar1);
         frame1.pack();
         frame1.setVisible(true);
+        frame2.pack();
+        frame2.setVisible(true);
 
     }
 
-    public void ordinaDati(XYSeries serie) {
+    public LocalDateTime ordinaDati(XYSeries serie) {
         //ORDINO I DATI
         //LI USO PER CREARE LA QUERY XML
         //GRAZIE A TEMPO OTTENGO UNA RISPOSTA
         //IN BASE ALLE RISPOSTE PER OGNI TREND O STATO TROVATO  CREO UNA SERIE DIVERSA
 
-        //trovo il DT da sottrarre a ogni vaore sull'asse x per fare iniziare il nostro grafico al tempo 0
+        //trovo il DT da sottrarre a ogni valore sull'asse x per fare iniziare il nostro grafico al tempo 0
         LocalDateTime primaData = null;
 
         for (LocalDateTime key : risultati.keySet()) {
@@ -527,6 +615,34 @@ public class Grafico extends JPanel implements ActionListener {
             LocalDateTime value = key;
             long seconds = ChronoUnit.SECONDS.between(primaData, value);
             serie.add(seconds, risultati.get(key));
+        }
+        return primaData;
+    }
+
+    private void aggiungiSerie(ArrayList<Intervallo> intervalli, LocalDateTime primaData) {
+        int i = 0;
+        if (this.risultati.isEmpty()) {
+            System.out.println("La mappa risultati è vuota");
+            return;
+        }
+        for (Intervallo intervallo : intervalli) {
+            // Creo una serie per ogni intervallo nella risposta
+            XYSeries serie1 = new XYSeries("" + i);
+            i++;
+            for (LocalDateTime key : this.risultati.keySet()) {
+                if (key.isAfter(intervallo.getInizio()) || key.isEqual(intervallo.getInizio())) {
+                    if (key.isBefore(intervallo.getFine()) || key.isEqual(intervallo.getFine())) {
+                        long seconds = ChronoUnit.SECONDS.between(primaData, key);
+                        Float value = this.risultati.get(key);
+                        if (value != null) {
+                            serie1.add(seconds, value);
+                        }
+                    }
+                }
+            }
+            if (!serie1.isEmpty()) {
+                this.dataset1.addSeries(serie1);
+            }
         }
     }
 

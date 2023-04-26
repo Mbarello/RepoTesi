@@ -189,13 +189,13 @@ public class Query {
         // write the T01 threshold element
         xmlWriter.writeStartElement("Threshold"); //CHIUSO
         xmlWriter.writeAttribute("name", "T01");
-        xmlWriter.writeAttribute("max", minThreshold);
+        xmlWriter.writeAttribute("max", String.valueOf(Float.parseFloat(minThreshold)));
         xmlWriter.writeEndElement(); //Threshold
 
         // write the T02 threshold element
         xmlWriter.writeStartElement("Thresholds"); //CHIUSO
         xmlWriter.writeAttribute("name", "T02");
-        xmlWriter.writeAttribute("max",maxThreshold);
+        xmlWriter.writeAttribute("max",String.valueOf(Float.parseFloat(maxThreshold)));
         xmlWriter.writeEndElement(); //Threshold
 
         // write the T03 threshold element
